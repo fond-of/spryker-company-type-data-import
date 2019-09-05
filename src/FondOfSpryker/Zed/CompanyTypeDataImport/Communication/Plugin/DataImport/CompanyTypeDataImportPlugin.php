@@ -4,6 +4,7 @@ namespace FondOfSpryker\Zed\CompanyTypeDataImport\Communication\Plugin\DataImpor
 
 use FondOfSpryker\Zed\CompanyTypeDataImport\CompanyTypeDataImportConfig;
 use Generated\Shared\Transfer\DataImporterConfigurationTransfer;
+use Generated\Shared\Transfer\DataImporterReportTransfer;
 use Spryker\Zed\DataImport\Dependency\Plugin\DataImportPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -20,9 +21,9 @@ class CompanyTypeDataImportPlugin extends AbstractPlugin implements DataImportPl
      *
      * @return \Generated\Shared\Transfer\DataImporterReportTransfer
      */
-    public function import(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null)
+    public function import(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterReportTransfer
     {
-        return $this->getFacade()->importCompanyRoles($dataImporterConfigurationTransfer);
+        return $this->getFacade()->importCompanyTypes($dataImporterConfigurationTransfer);
     }
 
     /**
@@ -30,7 +31,7 @@ class CompanyTypeDataImportPlugin extends AbstractPlugin implements DataImportPl
      *
      * @return string
      */
-    public function getImportType()
+    public function getImportType(): string
     {
         return CompanyTypeDataImportConfig::IMPORT_TYPE_COMPANY_TYPE;
     }

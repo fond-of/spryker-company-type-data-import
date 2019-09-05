@@ -18,7 +18,7 @@ interface CompanyTypeDataImportFacadeInterface
      *
      * @return \Generated\Shared\Transfer\DataImporterReportTransfer
      */
-    public function importCompanyRoles(
+    public function importCompanyTypes(
         ?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null
     ): DataImporterReportTransfer;
 }

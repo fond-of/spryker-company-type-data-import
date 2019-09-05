@@ -17,8 +17,14 @@ class CompanyTypeWriterStep implements DataImportStepInterface
      */
     public function execute(DataSetInterface $dataSet): void
     {
-        FosCompanyTypeQuery::create()
+        $fosCompanyType = FosCompanyTypeQuery::create()
             ->filterByKey($dataSet[CompanyTypeDataSetInterface::COLUMN_KEY])
             ->findOneOrCreate();
+
+        $fosCompanyType->fromArray($dataSet->getArrayCopy());
+
+        if ($fosCompanyType->isNew() || $fosCompanyType->isModified()) {
+            $fosCompanyType->save();
+        }
     }
 }

@@ -3,7 +3,6 @@
 namespace FondOfSpryker\Zed\CompanyTypeDataImport;
 
 use Codeception\Test\Unit;
-use Generated\Shared\Transfer\DataImporterConfigurationTransfer;
 
 class CompanyTypeDataImportConfigTest extends Unit
 {
@@ -30,9 +29,18 @@ class CompanyTypeDataImportConfigTest extends Unit
         $dataImporterConfigurationTransfer = $this->companyTypeDataImportConfig
             ->getCompanyTypeDataImporterConfiguration();
 
-        $this->assertInstanceOf(
-            $dataImporterConfigurationTransfer,
-            DataImporterConfigurationTransfer::class
+        $this->assertEquals(
+            CompanyTypeDataImportConfig::IMPORT_TYPE_COMPANY_TYPE,
+            $dataImporterConfigurationTransfer->getImportType()
+        );
+
+        $this->assertNotNull(
+            $dataImporterConfigurationTransfer->getReaderConfiguration()
+        );
+
+        $this->assertEquals(
+            codecept_root_dir('data/import/company_type.csv'),
+            $dataImporterConfigurationTransfer->getReaderConfiguration()->getFileName()
         );
     }
 }
