@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\CompanyTypeDataImport;
 
 use Codeception\Test\Unit;
+use Spryker\Shared\DataImport\DataImportConstants;
 
 class CompanyTypeDataImportConfigTest extends Unit
 {
@@ -18,7 +19,24 @@ class CompanyTypeDataImportConfigTest extends Unit
     {
         parent::_before();
 
-        $this->companyTypeDataImportConfig = new CompanyTypeDataImportConfig();
+        $this->companyTypeDataImportConfig = new class()
+            extends CompanyTypeDataImportConfig {
+
+            /**
+             * @param string $key
+             * @param mixed|null $default
+             *
+             * @return mixed
+             */
+            protected function get($key, $default = null)
+            {
+                if ($key === DataImportConstants::IMPORT_FILE_ROOT_PATH) {
+                    return $default;
+                }
+
+                return parent::get($key, $default);
+            }
+        };
     }
 
     /**
